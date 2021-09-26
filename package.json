@@ -1,6 +1,6 @@
 {
   "name": "xcalibur-dispatcher",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "",
   "author": "MiVvlt",
   "private": true,
@@ -28,6 +28,7 @@
     "cookie-parser": "^1.4.5",
     "dotenv": "^10.0.0",
     "jwt-decode": "^3.1.2",
+    "redis": "^3.1.2",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0"
