@@ -14,6 +14,10 @@ import {
 export class AuthService {
 	constructor( @Inject( 'AUTH_SERVICE' ) private authClient: ClientProxy ) {}
 
+	async getStatus(): Promise<Boolean> {
+		return this.authClient.send<Boolean>( 'status', null ).toPromise();
+	}
+
 	async getPayloadFromAccessToken( token: string ): Promise<ITokenPayload> {
 		return this.authClient.send<ITokenPayload>( 'payload-from-access-token', token ).toPromise();
 	}

@@ -4,6 +4,7 @@ import {
 	Get,
 	HttpException,
 	HttpStatus,
+	Logger,
 	Post,
 	Req,
 	Res,
@@ -19,8 +20,19 @@ import * as jwtDecode from 'jwt-decode';
 @Controller( 'auth' )
 export class AuthController {
 	private static refreshTokenCookieKey = 'refresh_token';
+	private logger: Logger               = new Logger( 'AuthController' );
 
 	constructor( private authService: AuthService ) {}
+
+	@Public() @Get( 'status' )
+	async getStatus(): Promise<Boolean> {
+		try {
+			return await this.authService.getStatus();
+		} catch ( e ) {
+			this.logger.error( e );
+			return false;
+		}
+	}
 
 	@Public() @Get( 'refresh-token' )
 	async getRefreshToken( @Req() req: any ): Promise<IAccessToken> {
