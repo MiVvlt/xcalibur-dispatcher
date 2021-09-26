@@ -1,0 +1,22 @@
+name: Push to docker registry
+on:
+  push:
+    tags:
+      - v*.*
+jobs:
+  create-docker-image:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Log version
+        run: echo "Creating docker image for version ${GITHUB_REF##*/}"
+      - uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_REGISTRY_USERNAME }}
+          password: ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
+      - name: Build docker image
+        run: |
+          docker build ./ -t mivvlt/xcalibur-dispatcher:${GITHUB_REF##*/}
+      - name: Push docker image
+        run: |
+          docker push mivvlt/xcalibur-dispatcher:${GITHUB_REF##*/}
