@@ -12,10 +12,9 @@ import { AuthService } from './auth.service';
 @Module( {
 	         imports    : [ ClientsModule.register( [ {
 		         name     : 'AUTH_SERVICE',
-		         transport: Transport.TCP,
+		         transport: Transport.REDIS,
 		         options  : {
-			         host: process.env.AUTHENTICATION_SERVCE_HOST || 'localhost',
-			         port: parseInt(process.env.AUTHENTICATION_SERVCE_PORT) || 3000,
+			        url: process.env.REDIS_URL
 		         },
 	         },
 	                                                ] ),
